@@ -1,44 +1,349 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
 <head>
-    <title>Gmail Test</title>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gmail - Test Page</title>
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f0f0f0;
-            text-align: center;
-            padding: 50px;
+        /* Reset and body styles */
+        * {
             margin: 0;
+            padding: 0;
+            box-sizing: border-box;
         }
+        body {
+            font-family: 'Google Sans', Arial, sans-serif;
+            background: #f1f3f4;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Gmail Header */
+        .gmail-header {
+            background: white;
+            padding: 12px 30px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+            display: flex;
+            align-items: center;
+            gap: 20px;
+        }
+        .gmail-logo {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 22px;
+            font-weight: 500;
+            color: #5f6368;
+        }
+        .gmail-logo .red { color: #ea4335; }
+        .gmail-logo .blue { color: #4285f4; }
+        .gmail-logo .green { color: #34a853; }
+        .gmail-logo .yellow { color: #fbbc05; }
+        .gmail-logo .m { 
+            font-size: 28px;
+            font-weight: 700;
+            background: #4285f4;
+            color: white;
+            padding: 2px 6px;
+            border-radius: 3px;
+        }
+
+        .header-right {
+            margin-left: auto;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            font-size: 14px;
+            color: #5f6368;
+        }
+        .header-right .avatar {
+            width: 32px;
+            height: 32px;
+            background: #4285f4;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 600;
+        }
+
+        /* Main Content */
         .container {
-            background-color: white;
-            padding: 40px;
-            border-radius: 10px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
-            max-width: 600px;
-            margin: 0 auto;
+            flex: 1;
+            max-width: 900px;
+            margin: 40px auto;
+            padding: 0 20px;
+            width: 100%;
         }
-        h1 { color: #EA4335; }
+
+        /* Inbox Style Card */
+        .inbox-card {
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+
+        .inbox-toolbar {
+            padding: 16px 24px;
+            border-bottom: 1px solid #e8eaed;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+        }
+        .inbox-toolbar .title {
+            font-size: 16px;
+            font-weight: 500;
+            color: #202124;
+        }
+        .inbox-toolbar .badge {
+            background: #e8f0fe;
+            color: #1a73e8;
+            padding: 4px 12px;
+            border-radius: 20px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        /* Email List */
+        .email-item {
+            padding: 16px 24px;
+            border-bottom: 1px solid #f1f3f4;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            cursor: pointer;
+            transition: background 0.2s;
+        }
+        .email-item:hover {
+            background: #f8f9fa;
+        }
+        .email-item .checkbox {
+            width: 18px;
+            height: 18px;
+            border: 2px solid #dadce0;
+            border-radius: 4px;
+            flex-shrink: 0;
+        }
+        .email-item .sender {
+            font-weight: 500;
+            color: #202124;
+            min-width: 150px;
+        }
+        .email-item .subject {
+            color: #202124;
+            flex: 1;
+        }
+        .email-item .subject .highlight {
+            background: #fce8e6;
+            padding: 2px 6px;
+            border-radius: 3px;
+            font-weight: 500;
+            color: #d93025;
+        }
+        .email-item .preview {
+            color: #5f6368;
+            font-size: 14px;
+            flex: 1;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+        .email-item .time {
+            color: #5f6368;
+            font-size: 12px;
+            flex-shrink: 0;
+        }
+        .email-item .star {
+            color: #fbbc04;
+            font-size: 18px;
+        }
+
+        /* Alert Banner */
+        .alert-banner {
+            background: #fce8e6;
+            border-left: 4px solid #d93025;
+            padding: 16px 24px;
+            margin: 20px 0;
+            border-radius: 8px;
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+        .alert-banner .icon {
+            font-size: 28px;
+        }
+        .alert-banner .text {
+            flex: 1;
+            color: #202124;
+        }
+        .alert-banner .text strong {
+            color: #d93025;
+        }
+        .alert-banner .action-btn {
+            background: #d93025;
+            color: white;
+            border: none;
+            padding: 8px 20px;
+            border-radius: 4px;
+            cursor: pointer;
+            font-weight: 500;
+        }
+        .alert-banner .action-btn:hover {
+            background: #c5221f;
+        }
+
+        /* Back to Home */
         .back-link {
             display: inline-block;
             margin-top: 20px;
-            padding: 10px 20px;
-            background-color: #0366d6;
+            padding: 12px 24px;
+            background: #1a73e8;
             color: white;
             text-decoration: none;
-            border-radius: 5px;
+            border-radius: 8px;
+            font-weight: 500;
+            transition: background 0.3s;
         }
         .back-link:hover {
-            background-color: #024ea4;
+            background: #1557b0;
+        }
+
+        /* Footer */
+        .footer {
+            text-align: center;
+            padding: 20px;
+            color: #5f6368;
+            font-size: 12px;
+            border-top: 1px solid #e8eaed;
+            margin-top: 20px;
+        }
+        .footer a {
+            color: #1a73e8;
+            text-decoration: none;
+        }
+
+        /* Responsive */
+        @media (max-width: 700px) {
+            .email-item {
+                flex-wrap: wrap;
+                gap: 8px;
+            }
+            .email-item .sender {
+                min-width: 100px;
+            }
+            .email-item .preview {
+                white-space: normal;
+                flex-basis: 100%;
+            }
+            .gmail-header {
+                padding: 10px 16px;
+                flex-wrap: wrap;
+            }
+            .alert-banner {
+                flex-direction: column;
+                text-align: center;
+            }
         }
     </style>
 </head>
 <body>
+
+    <!-- Gmail Header -->
+    <header class="gmail-header">
+        <div class="gmail-logo">
+            <span class="m">G</span>
+            <span class="red">m</span><span class="blue">a</span><span class="green">i</span><span class="yellow">l</span>
+        </div>
+        <div class="header-right">
+            <span>Test Account</span>
+            <div class="avatar">T</div>
+        </div>
+    </header>
+
+    <!-- Main Content -->
     <div class="container">
-        <h1>📧 Gmail Test Page</h1>
-        <p>This is my Gmail test page.</p>
-        <p>You can test Gmail-related features here.</p>
+
+        <!-- Alert Banner (Security Warning) -->
+        <div class="alert-banner">
+            <div class="icon">⚠️</div>
+            <div class="text">
+                <strong>Security Alert:</strong> Someone tried to log into your account from an unrecognized device (Windows, Johannesburg). 
+                If this was you, you can <a href="#" style="color:#d93025; font-weight:500;">review the activity</a>.
+            </div>
+            <button class="action-btn">Secure Account</button>
+        </div>
+
+        <!-- Inbox Card -->
+        <div class="inbox-card">
+            <div class="inbox-toolbar">
+                <span class="title">📬 Inbox</span>
+                <span class="badge">3 unread</span>
+            </div>
+
+            <!-- Email 1 -->
+            <div class="email-item">
+                <div class="checkbox"></div>
+                <span class="star">⭐</span>
+                <span class="sender"><strong>Google Security</strong></span>
+                <span class="subject">🔴 <span class="highlight">Security alert</span> - Suspicious login detected</span>
+                <span class="preview">We noticed a sign-in from an unfamiliar location...</span>
+                <span class="time">2 min ago</span>
+            </div>
+
+            <!-- Email 2 -->
+            <div class="email-item">
+                <div class="checkbox"></div>
+                <span class="star">☆</span>
+                <span class="sender"><strong>GitHub</strong></span>
+                <span class="subject">[GitHub] Your repository volten was updated</span>
+                <span class="preview">nurikiar430-dot pushed to main branch...</span>
+                <span class="time">1 hour ago</span>
+            </div>
+
+            <!-- Email 3 -->
+            <div class="email-item">
+                <div class="checkbox"></div>
+                <span class="star">☆</span>
+                <span class="sender"><strong>Hostinger</strong></span>
+                <span class="subject">Your hosting plan expires soon!</span>
+                <span class="preview">Renew your Single Web Hosting plan before...</span>
+                <span class="time">3 hours ago</span>
+            </div>
+
+            <!-- Email 4 -->
+            <div class="email-item">
+                <div class="checkbox"></div>
+                <span class="star">☆</span>
+                <span class="sender"><strong>YouTube</strong></span>
+                <span class="subject">New comment on your video: "Hello, world!"</span>
+                <span class="preview">someone_123: "Great content!"</span>
+                <span class="time">Yesterday</span>
+            </div>
+
+            <!-- Email 5 -->
+            <div class="email-item">
+                <div class="checkbox"></div>
+                <span class="star">☆</span>
+                <span class="sender"><strong>Facebook</strong></span>
+                <span class="subject">Someone tried to log into your Facebook account</span>
+                <span class="preview">We noticed a login from an unknown device...</span>
+                <span class="time">Yesterday</span>
+            </div>
+        </div>
+
+        <!-- Back to Home -->
         <a href="index.html" class="back-link">← Back to Home</a>
+
+        <!-- Footer -->
+        <div class="footer">
+            © 2026 Gmail Test Page - Made with ❤️ on GitHub Pages
+        </div>
     </div>
+
 </body>
 </html>
