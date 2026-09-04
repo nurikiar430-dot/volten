@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
-<head>
+<head> 
+    <link rel="icon" href="https://ssl.gstatic.com/ui/v1/icons/mail/rfr/gmail.ico" type="image/x-icon">
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gmail - Test Page</title>
@@ -26,8 +27,7 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.1);
             display: flex;
             align-items: center;
-            gap: 20px;
-        }
+            gap: 20px;}
         .gmail-logo {
             display: flex;
             align-items: center;
@@ -35,7 +35,7 @@
             font-size: 22px;
             font-weight: 500;
             color: #5f6368;
-        }
+      }
         .gmail-logo .red { color: #ea4335; }
         .gmail-logo .blue { color: #4285f4; }
         .gmail-logo .green { color: #34a853; }
@@ -68,16 +68,31 @@
             color: white;
             font-weight: 600;
         }
+<div class="gmail-layout">
+    <!-- Sidebar -->
+    <div class="sidebar">
+        <button class="compose-btn">Compose</button>
+        <ul>
+            <li>Inbox</li>
+            <li>Starred</li>
+            <li>Sent</li>
+        </ul>
+    </div>
 
-        /* Main Content */
-        .container {
-            flex: 1;
-            max-width: 900px;
-            margin: 40px auto;
-            padding: 0 20px;
-            width: 100%;
-        }
-
+    <!-- Main Content Area -->
+    <div class="main-content">
+        <!-- Top Bar -->
+        <div class="top-bar">
+            <div class="search-box">Search mail</div>
+            <div class="profile-icon">T</div>
+        </div>
+        
+        <!-- Your existing inbox email list goes here -->
+        <div class="inbox-list">
+             <!-- Email items... -->
+        </div>
+    </div>
+</div>
         /* Inbox Style Card */
         .inbox-card {
             background: white;
@@ -85,7 +100,29 @@
             box-shadow: 0 1px 3px rgba(0,0,0,0.12), 0 1px 2px rgba(0,0,0,0.08);
             overflow: hidden;
         }
-
+.gmail-layout {
+    display: flex;
+    height: 100vh; /* Fills screen */
+}
+.sidebar {
+    width: 250px;
+    background-color: #f6f8fc;
+    padding: 15px;
+}
+.main-content {
+    flex-grow: 1;
+    background-color: white;
+    display: flex;
+    flex-direction: column;
+}
+.top-bar {
+    height: 64px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 0 20px;
+    border-bottom: 1px solid #e0e0e0;
+}
         .inbox-toolbar {
             padding: 16px 24px;
             border-bottom: 1px solid #e8eaed;
@@ -195,22 +232,6 @@
         }
         .alert-banner .action-btn:hover {
             background: #c5221f;
-        }
-
-        /* Back to Home */
-        .back-link {
-            display: inline-block;
-            margin-top: 20px;
-            padding: 12px 24px;
-            background: #1a73e8;
-            color: white;
-            text-decoration: none;
-            border-radius: 8px;
-            font-weight: 500;
-            transition: background 0.3s;
-        }
-        .back-link:hover {
-            background: #1557b0;
         }
 
         /* Footer */
@@ -335,9 +356,6 @@
                 <span class="time">Yesterday</span>
             </div>
         </div>
-
-        <!-- Back to Home -->
-        <a href="index.html" class="back-link">← Back to Home</a>
 
         <!-- Footer -->
         <div class="footer">
